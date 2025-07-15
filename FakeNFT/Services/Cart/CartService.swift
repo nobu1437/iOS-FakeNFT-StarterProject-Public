@@ -38,7 +38,13 @@ final class CartService: CartServiceProtocol {
                 
                 dispatchGroup.notify(queue: .main) {
                     if !errors.isEmpty {
-                        onResponse(.failure(errors.first ?? "Unknown Error"))
+                        onResponse(.failure(errors.first ?? NSError(
+                            domain: "fakenfttapi"
+                            , code: -1,
+                            userInfo: [NSLocalizedDescriptionKey: "Unknown Error"]
+                        )
+                        )
+                        )
                     } else {
                         onResponse(.success(cartItems))
                     }
