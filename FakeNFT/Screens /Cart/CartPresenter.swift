@@ -6,7 +6,6 @@ final class CartPresenter {
     
     weak var view: CartViewProtocol?
     private let cartService: CartServiceProtocol
-    private let sortOptionKey = "sortOption"
     private var items: [CartItemModel] = []
     
     // MARK: - Initializers
@@ -18,7 +17,7 @@ final class CartPresenter {
     // MARK: - Public Methods
     
     func sort (by option: SortOption ) {
-        UserDefaults.standard.set(option.rawValue, forKey: sortOptionKey)
+        UserDefaultsService.shared.sortOption = option
         
         switch option {
         case .name:
@@ -57,9 +56,8 @@ extension CartPresenter: CartPresenterProtocol {
             
             switch result {
             case .success(let model):
-                self.items = model.items // про это ещё раз уточнить
-                if let rawValue = UserDefaults.standard.string(forKey: self.sortOptionKey),
-                   let sortOption = SortOption(rawValue: rawValue) {
+                self.items = model.items
+                if let sortOption = UserDefaultsService.shared.sortOption {
                     self.sort(by: sortOption)
                 } else {
                     self.view?.update(with: model)

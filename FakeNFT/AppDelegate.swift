@@ -1,7 +1,5 @@
 import UIKit
 
-var window: UIWindow?
-
 @main
 final class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(
