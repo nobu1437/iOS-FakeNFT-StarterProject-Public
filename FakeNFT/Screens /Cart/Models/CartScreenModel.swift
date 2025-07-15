@@ -5,11 +5,7 @@ struct CartScreenModel {
     let itemsCount: Int
     
     var totalPrice: Double {
-        var price: Double = 0
-        items.forEach {
-            price += $0.price
-        }
-        return price
+        items.reduce(0) {$0 + $1.price}
     }
     
     init(items: [CartItemModel]) {

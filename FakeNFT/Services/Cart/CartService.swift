@@ -38,7 +38,7 @@ final class CartService: CartServiceProtocol {
                 
                 dispatchGroup.notify(queue: .main) {
                     if !errors.isEmpty {
-                        onResponse(.failure(errors.first!))
+                        onResponse(.failure(errors.first ?? "Unknown Error"))
                     } else {
                         onResponse(.success(cartItems))
                     }
