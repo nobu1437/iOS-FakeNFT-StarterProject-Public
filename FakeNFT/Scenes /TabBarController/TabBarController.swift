@@ -52,7 +52,7 @@ final class TabBarController: UITabBarController {
         let navCartController = UINavigationController(rootViewController: cartController)
         navCartController.tabBarItem = UITabBarItem(
             title: "Корзина",
-            image: UIImage(resource: .sort),
+            image: UIImage(resource: .cart),
             tag: 1
         )
         

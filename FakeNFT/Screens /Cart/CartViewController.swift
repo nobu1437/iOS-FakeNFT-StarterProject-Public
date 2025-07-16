@@ -158,19 +158,19 @@ final class CartViewController: UIViewController {
             preferredStyle: .actionSheet
         )
         
-        let alertAction1 = UIAlertAction(
+        let sortByPriceAlertAction = UIAlertAction(
             title: NSLocalizedString("Sort.byPrice", comment: ""),
             style: .default) { _ in
                 self.presenter.sort(by: .price)
             }
         
-        let alertAction2 = UIAlertAction(
+        let sortByRatingAlertAction = UIAlertAction(
             title: NSLocalizedString("Sort.byRating", comment: ""),
             style: .default) { _ in
                 self.presenter.sort(by: .rating)
             }
         
-        let alertAction3 = UIAlertAction(
+        let sortByNameAlertAction = UIAlertAction(
             title:NSLocalizedString("Sort.byName", comment: ""),
             style: .default) { _ in
                 self.presenter.sort(by: .name)
@@ -180,9 +180,9 @@ final class CartViewController: UIViewController {
             title: NSLocalizedString("Sort.dismiss", comment: ""),
             style: .cancel)
         
-        [alertAction1,
-         alertAction2,
-         alertAction3,
+        [sortByPriceAlertAction,
+         sortByRatingAlertAction,
+         sortByNameAlertAction,
          alertActionCancel].forEach {
             alert.addAction($0)
         }
