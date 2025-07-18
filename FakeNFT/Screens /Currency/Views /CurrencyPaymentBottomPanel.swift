@@ -58,7 +58,7 @@ final class CurrencyPaymentBottomPanel: UIView {
         
         super.init(frame: .zero)
         
-//        configure()
+        configure()
     }
     
     required init?(coder: NSCoder) {
@@ -83,7 +83,7 @@ final class CurrencyPaymentBottomPanel: UIView {
         paymentButton.addTarget(self, action: #selector(showWebView), for: .touchUpInside)
         blockButton()
         
-        // setupSubviews()
+         setupSubviews()
     }
     
     private func setupSubviews() {

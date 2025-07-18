@@ -10,7 +10,6 @@ final class CurrencyCollectionCell: UICollectionViewCell {
         let view = UIView()
         view.backgroundColor = UIColor.segmentActive
         view.layer.cornerRadius = 6
-        view.layer.masksToBounds = true
         
         return view
     }()
@@ -19,7 +18,6 @@ final class CurrencyCollectionCell: UICollectionViewCell {
        let imageView = UIImageView()
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 6
-        imageView.layer.masksToBounds = true
         
         return imageView
     }()
@@ -46,7 +44,6 @@ final class CurrencyCollectionCell: UICollectionViewCell {
         super.init(frame: frame)
         
         layer.cornerRadius = 12
-        layer.masksToBounds = true
         
         backgroundColor = UIColor.segmentInactive
         

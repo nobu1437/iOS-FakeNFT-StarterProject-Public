@@ -7,6 +7,7 @@ final class CartPresenter {
     weak var view: CartViewProtocol?
     private let cartService: CartServiceProtocol
     private var items: [CartItemModel] = []
+    var needsReloadAfterReturning = true
     
     // MARK: - Initializers
     
@@ -50,7 +51,12 @@ final class CartPresenter {
 
 extension CartPresenter: CartPresenterProtocol {
     func setup() {
-        view?.showProgressHUD()
+        if !needsReloadAfterReturning {
+            needsReloadAfterReturning = true
+            return
+        }
+        
+        view?.showProgressHud()
         buildScreenModel {[weak self] result in
             guard let self = self else {return}
             
@@ -66,7 +72,7 @@ extension CartPresenter: CartPresenterProtocol {
                 print(error)
             }
             
-            self.view?.hideProgressHUD()
+            self.view?.hideProgressHud()
         }
     }
 }

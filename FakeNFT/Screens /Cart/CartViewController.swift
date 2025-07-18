@@ -10,7 +10,19 @@ final class CartViewController: UIViewController {
     
     // MARK: - UI Elements
     
-    private lazy var paymentPanel = PaymentPanelView()
+    private lazy var paymentPanel = PaymentPanelView { [weak self] in
+        guard let self = self else { return }
+        
+        let currencyService = CurrencyService()
+        let currencyPresenter = CurrencyPresenter(currencyService: currencyService)
+        let currencyVC = CurrencyViewController(presenter:  currencyPresenter)
+        currencyPresenter.view = currencyVC
+        
+        currencyVC.hidesBottomBarWhenPushed = true
+        self.presenter.needsReloadAfterReturning = false
+        self.navigationController?.pushViewController(currencyVC, animated: true)
+    }
+    
     private lazy var stubView = CartStubView(text: NSLocalizedString("Cart.empty", comment: ""))
     
     private var progressHud: UIActivityIndicatorView = {
@@ -235,11 +247,11 @@ extension CartViewController: CartViewProtocol {
         }
     }
     
-    func showProgressHUD() {
+    func showProgressHud() {
         progressHud.startAnimating()
     }
     
-    func hideProgressHUD() {
+    func hideProgressHud() {
         progressHud.stopAnimating()
     }
     
