@@ -12,3 +12,6 @@
 "Sort.byRating" = "По рэйтингу";
 "Sort.byName" = "По названию";
 "Sort.dismiss" = "Закрыть";
+"Currency.paymentPanel.text" = "Совершая покупку, вы соглашаетесь с условиями";
+"Currency.paymentPanel.linkButton.text" = "Пользовательского соглашения";
+"Currency.text" = "Выберите способ оплаты"

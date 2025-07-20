@@ -5,22 +5,22 @@ final class CurrencyPaymentBottomPanel: UIView {
     
     private let onTap: () -> Void
     
+    // MARK: - UI Elements
+    
     private let textLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.caption2
         label.textColor = UIColor.segmentActive
         label.numberOfLines = 0
-        // NSLocalizedString
-        label.text = NSLocalizedString("Совершая покупку, вы соглашаетесь с условиями", comment: "")
+        label.text = NSLocalizedString("Currency.paymentPanel.text", comment: "")
         
         return label
     }()
     
     private let linkButton: UIButton = {
-       let button = UIButton(type: .system)
-        // NSLocalizedString
+        let button = UIButton(type: .system)
         button.setTitle(
-            NSLocalizedString("Пользовательского соглашения",
+            NSLocalizedString("Currency.paymentPanel.linkButton.text",
                               comment: ""),
             for: .normal
         )
@@ -53,6 +53,8 @@ final class CurrencyPaymentBottomPanel: UIView {
         return button
     }()
     
+    // MARK: - Initializers
+    
     init(onTap: @escaping () -> Void) {
         self.onTap = onTap
         
@@ -65,6 +67,8 @@ final class CurrencyPaymentBottomPanel: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Public Methods
+    
     func blockButton() {
         paymentButton.isEnabled = false
         paymentButton.backgroundColor = UIColor.notEnabled
@@ -75,6 +79,8 @@ final class CurrencyPaymentBottomPanel: UIView {
         paymentButton.backgroundColor = UIColor.segmentActive
     }
     
+    // MARK: - Private Methods
+    
     private func configure() {
         backgroundColor = UIColor.segmentInactive
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
@@ -83,7 +89,7 @@ final class CurrencyPaymentBottomPanel: UIView {
         paymentButton.addTarget(self, action: #selector(showWebView), for: .touchUpInside)
         blockButton()
         
-         setupSubviews()
+        setupSubviews()
     }
     
     private func setupSubviews() {
@@ -104,7 +110,7 @@ final class CurrencyPaymentBottomPanel: UIView {
             make.height.equalTo(60)
         }
     }
-        
+    
     @objc
     private func showWebView() {
         onTap()

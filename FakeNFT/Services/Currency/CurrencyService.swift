@@ -3,6 +3,8 @@ import Foundation
 final class CurrencyService: CurrencyServiceProtocol {
     private let networkClient: NetworkClient
     
+    // MARK: - Initializers
+    
     init(networkClient: NetworkClient) {
         self.networkClient = networkClient
     }
@@ -10,6 +12,8 @@ final class CurrencyService: CurrencyServiceProtocol {
     convenience init() {
         self.init(networkClient: DefaultNetworkClient())
     }
+    
+    // MARK: - Public Methods
     
     func getCurrencies(onResponse: @escaping (Result<[CurrencyModel], any Error>) -> Void) {
         let request = CurrenciesRequest()

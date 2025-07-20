@@ -6,6 +6,8 @@ final class CurrencyCollectionCell: UICollectionViewCell {
     
     static let reuseIdentifier = "CurrencyCollectionCell"
     
+        // MARK: - UI Elements
+    
     private let imageBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.segmentActive
@@ -40,6 +42,8 @@ final class CurrencyCollectionCell: UICollectionViewCell {
         return label
     }()
     
+    // MARK: - Initializers
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -54,6 +58,8 @@ final class CurrencyCollectionCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Lifecycle
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         
@@ -61,6 +67,8 @@ final class CurrencyCollectionCell: UICollectionViewCell {
         shortNameLabel.text = nil
         currencyImageView.image = nil
     }
+    
+    // MARK: - Public Methods
     
     func configure(with model: CurrencyModel) {
         currencyImageView.kf.setImage(with: model.image)
@@ -76,6 +84,8 @@ final class CurrencyCollectionCell: UICollectionViewCell {
     func deselect() {
         layer.borderWidth = 0
     }
+    
+    // MARK: - Private Methods
     
     private func setupSubViews() {
         [imageBackgroundView,

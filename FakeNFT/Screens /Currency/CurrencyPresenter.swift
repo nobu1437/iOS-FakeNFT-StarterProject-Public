@@ -1,16 +1,19 @@
 import Foundation
 
-protocol CurrencyPresenterProtocol {
-    func setupData()
-}
-
 final class CurrencyPresenter {
+    
+    // MARK: - Properties
+    
     weak var view: CurrencyViewControllerProtocol?
     private let currencyService: CurrencyServiceProtocol
+    
+    // MARK: - Initializers
     
     init(currencyService: CurrencyServiceProtocol) {
         self.currencyService = currencyService
     }
+    
+    // MARK: - Private Methods
     
     private func buildScreenModel(onResponse: @escaping(Result<CurrenciesScreenModel, Error>) -> Void) {
         currencyService.getCurrencies{ result in
@@ -23,6 +26,8 @@ final class CurrencyPresenter {
         }
     }
 }
+
+// MARK: - CurrencyPresenterProtocol
 
 extension CurrencyPresenter: CurrencyPresenterProtocol {
     func setupData() {

@@ -1,8 +1,5 @@
-//
-//  CurrencyViewControllerProtocol.swift
-//  FakeNFT
-//
-//  Created by Илья Ануфриев on 20.07.2025.
-//
-
 import Foundation
+
+protocol CurrencyViewControllerProtocol: AnyObject, Loadable {
+    func setup(with data: CurrenciesScreenModel)
+}

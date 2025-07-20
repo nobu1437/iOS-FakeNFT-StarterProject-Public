@@ -1,16 +1,17 @@
 import UIKit
 import SnapKit
 
-protocol CurrencyViewControllerProtocol: AnyObject, Loadable {
-    func setup(with data: CurrenciesScreenModel)
-}
-
 final class CurrencyViewController: UIViewController {
+    
+    // MARK: - Properties
+    
     private let presenter: CurrencyPresenter
     private var currencies: [CurrencyModel] = []
     
     private let paymentPanel = CurrencyPaymentBottomPanel {
     }
+    
+    // MARK: - UI Elements
     
     private let progressHud: UIActivityIndicatorView = {
         let progress = UIActivityIndicatorView(style: .medium)
@@ -37,6 +38,8 @@ final class CurrencyViewController: UIViewController {
         return collection
     }()
     
+    // MARK: - Initializers
+    
     init(presenter: CurrencyPresenter) {
         self.presenter = presenter
         
@@ -47,17 +50,20 @@ final class CurrencyViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-         configure()
+        configure()
     }
+    
+    // MARK: - Private Methods
     
     private func configure() {
         view.backgroundColor = UIColor.background
-        // NSLocalizedString
         title = NSLocalizedString(
-            "Выберите способ оплаты",
+            "Currency.text",
             comment: ""
         )
         navigationController?.navigationBar.standardAppearance.titleTextAttributes = [
@@ -68,7 +74,7 @@ final class CurrencyViewController: UIViewController {
         currencyCollectionView.delegate = self
         currencyCollectionView.dataSource = self
         
-         setupSubViews()
+        setupSubViews()
         presenter.setupData()
     }
     
@@ -105,6 +111,8 @@ final class CurrencyViewController: UIViewController {
     }
 }
 
+// MARK: - CurrencyViewControllerProtocol
+
 extension CurrencyViewController: CurrencyViewControllerProtocol {
     func showProgressHud() {
         progressHud.startAnimating()
@@ -119,6 +127,8 @@ extension CurrencyViewController: CurrencyViewControllerProtocol {
         currencyCollectionView.reloadData()
     }
 }
+
+// MARK: - UICollectionViewDataSource
 
 extension CurrencyViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -137,19 +147,17 @@ extension CurrencyViewController: UICollectionViewDataSource {
     }
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
+
 extension CurrencyViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = getCell(collectionView, at: indexPath) else {
-            return
-        }
+        guard let cell = getCell(collectionView, at: indexPath) else { return }
         cell.select()
         paymentPanel.unlockButton()
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        guard let cell = getCell(collectionView, at: indexPath) else {
-            return
-        }
+        guard let cell = getCell(collectionView, at: indexPath) else { return }
         cell.deselect()
     }
     
@@ -163,7 +171,7 @@ extension CurrencyViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 7
+        7
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
