@@ -5,7 +5,7 @@ final class CartService: CartServiceProtocol {
     
     // MARK: - Public Methods
     
-    func getCartItems(onResponse: @escaping (Result<[CartItemModel], Error>) -> Void) {
+    func getCartItems(onResponse: @escaping (Result<([CartItemModel], [String]) ,Error>) -> Void) {
         let request = CartItemsRequest()
         
         networkClient.send(
@@ -46,7 +46,7 @@ final class CartService: CartServiceProtocol {
                         )
                         )
                     } else {
-                        onResponse(.success(cartItems))
+                        onResponse(.success((cartItems, response.nfts)))
                     }
                 }
                 
@@ -56,12 +56,12 @@ final class CartService: CartServiceProtocol {
         }
     }
     
-    func updateCart(_ items: [String], onResponse: @escaping (Result<Data, Error>) -> Void) {
-        let request = UpdateCartItemsRequest(dto: [1]) // попробовать вставить dto
-        networkClient.send(request: request) { result in
+    func updateCart(_ items: [String], onResponse: @escaping (Result<[String], Error>) -> Void) {
+        let request = UpdateCartItemsRequest(ids: items) // попробовать вставить dto
+        networkClient.send(request: request, type: CartItemDTO.self) { result in
             switch result {
             case .success(let data):
-                onResponse(.success(data))
+                onResponse(.success(data.nfts))
             case .failure(let error):
                 onResponse(.failure(error))
             }

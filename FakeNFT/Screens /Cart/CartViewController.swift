@@ -24,6 +24,7 @@ final class CartViewController: UIViewController {
     }
     
     private lazy var stubView = CartStubView(text: NSLocalizedString("Cart.empty", comment: ""))
+    private lazy var deleteAlert = DeleteAlertView()
     
     private var progressHud: UIActivityIndicatorView = {
         let progress = UIActivityIndicatorView(style: .medium)
@@ -160,6 +161,8 @@ final class CartViewController: UIViewController {
             nftTableView.reloadData()
             stubView.isHidden = true
         }
+        
+        paymentPanel.set(count: data.itemsCount, price: data.totalPrice)
     }
     
     @objc
@@ -218,7 +221,19 @@ extension CartViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        cell.configure(with: cards[indexPath.row])
+        let model = cards[indexPath.row]
+        cell.configure(with: cards[indexPath.row]) {[weak self] in
+            guard let self else {return}
+            deleteAlert.show(
+                on:self ,
+                with: view.frame.height,
+                image: model.image,
+                onDelete: {[presenter] in
+                    presenter.deleteNft(id: model.id)
+                }
+            )
+            view.layoutSubviews()
+        }
         
         return cell
     }
@@ -237,13 +252,27 @@ extension CartViewController: UITableViewDelegate {
 // MARK: - CartViewProtocol
 
 extension CartViewController: CartViewProtocol {
+    func updateAfterDelete(with data: CartScreenModel, deletedId: String) {
+        guard let row = (cards.firstIndex {$0.id == deletedId}) else {return}
+        let lastDeletedIndexPath = IndexPath(row: row, section: 0)
+        
+        update(with: data)
+        nftTableView.performBatchUpdates {
+            nftTableView.deleteRows(at: [lastDeletedIndexPath], with: .automatic)
+        }
+    }
+    
     func update(with data: CartScreenModel) {
-        self.cards = data.items
+        cards = data.items
         if cards.isEmpty {
-            showStubView()
+            if !stubView.isDescendant(of: view) {
+                setupStubView()
+            }
+            hideMainViews()
+            stubView.isHidden = false
         } else {
             showMainViews(with: data)
-            nftTableView.reloadData()
+            stubView.isHidden = true
         }
     }
     
