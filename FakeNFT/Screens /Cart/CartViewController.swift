@@ -124,6 +124,11 @@ final class CartViewController: UIViewController {
             target: self,
             action: #selector(didTapSortButton)
         )
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem()
+        navigationItem.backButtonTitle = ""
+        navigationItem.backBarButtonItem?.tintColor = UIColor.segmentActive
+        
         filterButton.tintColor = UIColor.segmentActive
         navigationItem.setRightBarButton(filterButton, animated: false)
     }

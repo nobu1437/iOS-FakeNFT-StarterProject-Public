@@ -123,7 +123,7 @@ final class DeleteAlertView: UIView {
     }
     
     private func add(on viewController: UIViewController, with height: CGFloat) {
-        mainView.snp.makeConstraints { make in
+        mainView.snp.updateConstraints { make in
             make.top.equalToSuperview().offset(height * 0.32)
         }
         
