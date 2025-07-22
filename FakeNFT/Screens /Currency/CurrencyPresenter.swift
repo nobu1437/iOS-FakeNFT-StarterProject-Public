@@ -25,11 +25,44 @@ final class CurrencyPresenter {
             }
         }
     }
+    
+    private func showError() {
+        view?.showError(
+            title: NSLocalizedString("Не удалось произвести оплату",
+                                     comment: ""),
+            message: nil
+        )
+    }
 }
 
 // MARK: - CurrencyPresenterProtocol
 
 extension CurrencyPresenter: CurrencyPresenterProtocol {
+    func pay(in currencyId: String?) {
+        guard let currencyId else {
+            showError()
+            return
+        }
+        
+        view?.showProgressHud()
+        currencyService.pay(
+            currencyId: currencyId) {[view, showError] result in
+                view?.hideProgressHud()
+                switch result {
+                case .success(let payment):
+                    if payment.success {
+                        view?.showPaymentSuccess()
+                    } else {
+                        showError()
+                    }
+                    
+                case .failure(let error):
+                    print(error)
+                    showError()
+                }
+            }
+    }
+    
     func setupData() {
         view?.showProgressHud()
         buildScreenModel{ [view] result in
