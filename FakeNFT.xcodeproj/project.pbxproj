@@ -56,6 +56,8 @@
 		84B124582E2D8EDD0034B0A8 /* CurrencyPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B124572E2D8EDD0034B0A8 /* CurrencyPresenterProtocol.swift */; };
 		84B1245A2E2D8F660034B0A8 /* CurrencyViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B124592E2D8F660034B0A8 /* CurrencyViewControllerProtocol.swift */; };
 		84B9D21E2E2E69C200440F34 /* UserAgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B9D21D2E2E69C200440F34 /* UserAgreementViewController.swift */; };
+		84B9D2202E2F70C700440F34 /* PaymentDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B9D21F2E2F70C700440F34 /* PaymentDTO.swift */; };
+		84B9D2222E2F713D00440F34 /* PayRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B9D2212E2F713D00440F34 /* PayRequest.swift */; };
 		84C3A9F42E1EB8DC003205C1 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C3A9F32E1EB8DC003205C1 /* CartViewController.swift */; };
 		84C3A9F62E1EB8E7003205C1 /* CartPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C3A9F52E1EB8E7003205C1 /* CartPresenter.swift */; };
 		84C3A9F92E1EFAB2003205C1 /* CartScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C3A9F82E1EFAB2003205C1 /* CartScreenModel.swift */; };
@@ -148,6 +150,8 @@
 		84B124572E2D8EDD0034B0A8 /* CurrencyPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyPresenterProtocol.swift; sourceTree = "<group>"; };
 		84B124592E2D8F660034B0A8 /* CurrencyViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyViewControllerProtocol.swift; sourceTree = "<group>"; };
 		84B9D21D2E2E69C200440F34 /* UserAgreementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgreementViewController.swift; sourceTree = "<group>"; };
+		84B9D21F2E2F70C700440F34 /* PaymentDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentDTO.swift; sourceTree = "<group>"; };
+		84B9D2212E2F713D00440F34 /* PayRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayRequest.swift; sourceTree = "<group>"; };
 		84C3A9F32E1EB8DC003205C1 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		84C3A9F52E1EB8E7003205C1 /* CartPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartPresenter.swift; sourceTree = "<group>"; };
 		84C3A9F82E1EFAB2003205C1 /* CartScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartScreenModel.swift; sourceTree = "<group>"; };
@@ -384,6 +388,7 @@
 				0CFCB7412A78013E0009A829 /* Nft.swift */,
 				8495D24F2E244D0800D2E53F /* NftDTO.swift */,
 				8495D2512E244D0F00D2E53F /* CartItemDTO.swift */,
+				84B9D21F2E2F70C700440F34 /* PaymentDTO.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -412,6 +417,7 @@
 			isa = PBXGroup;
 			children = (
 				840078162E2A793E00EAA223 /* CurrenciesRequest.swift */,
+				84B9D2212E2F713D00440F34 /* PayRequest.swift */,
 			);
 			path = "Requests ";
 			sourceTree = "<group>";
@@ -754,6 +760,7 @@
 				84B1245A2E2D8F660034B0A8 /* CurrencyViewControllerProtocol.swift in Sources */,
 				84C3A9F62E1EB8E7003205C1 /* CartPresenter.swift in Sources */,
 				0CF2C2DD2A783CE600FDC837 /* ErrorView.swift in Sources */,
+				84B9D2202E2F70C700440F34 /* PaymentDTO.swift in Sources */,
 				0C79EE682A76DE0900EE90EA /* NftDetailPresenter.swift in Sources */,
 				3F68069B29CBBAF100B4F915 /* ProductDetailsTableViewController.swift in Sources */,
 				84904D632E2ACE9A0091437E /* DeleteAlertView.swift in Sources */,
@@ -791,6 +798,7 @@
 				84DB044F2E251D540089E2EA /* CartServiceProtocol.swift in Sources */,
 				0CFCB7442A7802440009A829 /* NftDetailInput.swift in Sources */,
 				0C79EE632A76DD1900EE90EA /* RequestConstants.swift in Sources */,
+				84B9D2222E2F713D00440F34 /* PayRequest.swift in Sources */,
 				8495D24E2E24481F00D2E53F /* CartItemsRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
