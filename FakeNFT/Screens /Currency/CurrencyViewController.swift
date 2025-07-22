@@ -7,9 +7,12 @@ final class CurrencyViewController: UIViewController {
     
     private let presenter: CurrencyPresenter
     private var currencies: [CurrencyModel] = []
+    private var userAgreementLink: URL?
     
-    private let paymentPanel = CurrencyPaymentBottomPanel {
-    }
+    private lazy var paymentPanel = CurrencyPaymentBottomPanel(
+        onTap: startPayment,
+        onLinkTap: openUserAgreement)
+    
     
     // MARK: - UI Elements
     
@@ -59,6 +62,17 @@ final class CurrencyViewController: UIViewController {
     }
     
     // MARK: - Private Methods
+    
+    private func openUserAgreement() {
+        let userAgreementVC = UserAgreementViewController(link: userAgreementLink)
+        userAgreementVC.modalPresentationStyle = .pageSheet
+        
+        present(userAgreementVC, animated: true)
+    }
+    
+    private func startPayment() {
+        print ("Оплата")
+    }
     
     private func configure() {
         view.backgroundColor = UIColor.background
@@ -123,6 +137,7 @@ extension CurrencyViewController: CurrencyViewControllerProtocol {
     }
     
     func setup(with data: CurrenciesScreenModel) {
+        userAgreementLink = data.userAgreementLink
         currencies = data.currencies
         currencyCollectionView.reloadData()
     }
