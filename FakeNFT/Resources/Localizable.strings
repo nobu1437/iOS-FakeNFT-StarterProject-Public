@@ -23,6 +23,6 @@
 "ErrorPaymentAlert.text" = "Не удалось произвести оплату";
 "SuccessPayment.back" = "Вернуться в каталог";
 "SuccessPayment.text" = "Успех! Оплата прошла, поздравляем с покупкой!";
-
-
-
+"Profile.nft.purchased" = "Мои NFT";
+"Profile.nft.favorite" = "Избранные NFT";
+"Profile.developer" = "О разработчике";
