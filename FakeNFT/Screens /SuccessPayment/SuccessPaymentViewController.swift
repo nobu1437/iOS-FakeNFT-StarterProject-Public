@@ -5,11 +5,12 @@ final class SuccessPaymentViewController: UIViewController {
     
     private let delegate: SuccessPaymentViewControllerDelegate
     
+    // MARK: - UI Elements
+    
     private let paymentButton: UIButton = {
-       let button = UIButton(type: .system)
+        let button = UIButton(type: .system)
         button.setTitle(
-            // NSLocalizedString
-            NSLocalizedString("Вернуться в каталог", comment: ""),
+            NSLocalizedString("SuccessPayment.back", comment: ""),
             for: .normal
         )
         button.setTitleColor(
@@ -28,8 +29,8 @@ final class SuccessPaymentViewController: UIViewController {
     private let imageView: UIImageView = {
         let image = UIImageView(
             image: UIImage(resource: .successPayment)
-            )
-       return image
+        )
+        return image
     }()
     
     private let textLAbel: UILabel = {
@@ -39,15 +40,18 @@ final class SuccessPaymentViewController: UIViewController {
         label.numberOfLines = 0
         label.textAlignment = .center
         label.text = NSLocalizedString(
-            // NSLocalizedString
-           "Успех! Оплата прошла, поздравляем с покупкой!" ,
+            "Успех! Оплата прошла, поздравляем с покупкой!",
             comment: ""
         )
         
         return label
     }()
     
+    // MARK: - Layout Stacks
+    
     private var vStack: UIStackView?
+    
+    // MARK: - Initializers
     
     init(delegate: SuccessPaymentViewControllerDelegate) {
         self.delegate = delegate
@@ -59,11 +63,15 @@ final class SuccessPaymentViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configure()
     }
+    
+    // MARK: - Private Methods
     
     @objc
     private func closeScreen() {
@@ -96,11 +104,11 @@ final class SuccessPaymentViewController: UIViewController {
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(16)
             make.height.equalTo(60)
         }
-
+        
         imageView.snp.makeConstraints { make in
             make.height.equalTo(278)
         }
-
+        
         vStack.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.horizontalEdges.equalToSuperview().inset(36)

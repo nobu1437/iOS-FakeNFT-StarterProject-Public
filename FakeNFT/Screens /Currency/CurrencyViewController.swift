@@ -12,8 +12,8 @@ final class CurrencyViewController: UIViewController {
     
     private lazy var paymentPanel = CurrencyPaymentBottomPanel(
         onTap: startPayment,
-        onLinkTap: openUserAgreement)
-    
+        onLinkTap: openUserAgreement
+    )
     
     // MARK: - UI Elements
     
@@ -114,10 +114,7 @@ final class CurrencyViewController: UIViewController {
         }
     }
     
-    private func getCell (
-        _ collectionView: UICollectionView,
-        at indexPath: IndexPath
-    ) -> CurrencyCollectionCell? {
+    private func getCell (_ collectionView: UICollectionView, at indexPath: IndexPath) -> CurrencyCollectionCell? {
         guard let cell = collectionView.cellForItem(
             at: indexPath
         ) as? CurrencyCollectionCell else {return nil}
@@ -147,9 +144,9 @@ extension CurrencyViewController: CurrencyViewControllerProtocol {
             message: message,
             preferredStyle: .alert
         )
+        
         let repeatButton = UIAlertAction(
-            // NSLocalizedString
-            title: NSLocalizedString("Повторить", comment: ""),
+            title: NSLocalizedString("ErrorPaymentAlert.repeat", comment: ""),
             style: .default,
             handler: { [presenter, selectedCurrencyId] _ in
                 presenter.pay(in: selectedCurrencyId)
@@ -157,8 +154,7 @@ extension CurrencyViewController: CurrencyViewControllerProtocol {
         )
         
         let cancelButton = UIAlertAction(
-            // NSLocalizedString
-            title: NSLocalizedString("Отмена", comment: ""),
+            title: NSLocalizedString("ErrorPaymentAlert.cancel", comment: ""),
             style: .default,
             handler: {_ in
                 alert.dismiss(animated: true)

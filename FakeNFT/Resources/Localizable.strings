@@ -17,3 +17,11 @@
 "Currency.text" = "Выберите способ оплаты";
 "DeleteAlert.comeBack" = "Вернуться";
 "DeleteAlert.delete" = "Удалить";
+"ErrorPaymentAlert.repeat" = "Повторить";
+"ErrorPaymentAlert.cancel" = "Отмена";
+"ErrorPaymentAlert.text" = "Не удалось произвести оплату";
+"SuccessPayment.back" = "Вернуться в каталог";
+"SuccessPayment.text" = "Успех! Оплата прошла, поздравляем с покупкой!";
+
+
+

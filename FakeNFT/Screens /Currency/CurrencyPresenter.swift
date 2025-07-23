@@ -28,8 +28,7 @@ final class CurrencyPresenter {
     
     private func showError() {
         view?.showError(
-            // NSLocalizedString
-            title: NSLocalizedString("Не удалось произвести оплату",
+            title: NSLocalizedString("ErrorPaymentAlert.text",
                                      comment: ""),
             message: nil
         )
@@ -51,8 +50,6 @@ extension CurrencyPresenter: CurrencyPresenterProtocol {
             }
         }
     }
-    
-   
     
     func pay(in currencyId: String?) {
         guard let currencyId else {
