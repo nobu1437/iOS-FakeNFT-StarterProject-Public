@@ -2,7 +2,7 @@ import Foundation
 
 protocol CartServiceProtocol {
     func getCartItems(
-        onResponse: @escaping (Result<([CartItemModel], [String]) ,Error>) -> Void
+        onResponse: @escaping (Result<(items: [CartItemModel], ids: [String]) ,Error>) -> Void
     )
     func updateCart(
         _ items: [String],

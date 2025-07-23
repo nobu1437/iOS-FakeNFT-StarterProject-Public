@@ -39,8 +39,7 @@ final class DeleteAlertView: UIView {
             for: .normal
         )
         button.setTitle(
-            // NSLocalizedString
-            NSLocalizedString("Вернуться", comment: ""),
+            NSLocalizedString("DeleteAlert.comeBack", comment: ""),
             for: .normal
         )
         button.layer.cornerRadius = 12
@@ -58,8 +57,7 @@ final class DeleteAlertView: UIView {
             for: .normal
         )
         button.setTitle(
-            // NSLocalizedString
-            NSLocalizedString("Удалить", comment: ""),
+            NSLocalizedString("DeleteAlert.delete", comment: ""),
             for: .normal)
         button.layer.cornerRadius = 12
         button.titleLabel?.font = UIFont.bodyRegular
