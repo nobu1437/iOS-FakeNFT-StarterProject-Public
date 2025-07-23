@@ -10,8 +10,21 @@ final class CartViewController: UIViewController {
     
     // MARK: - UI Elements
     
-    private lazy var paymentPanel = PaymentPanelView()
+    private lazy var paymentPanel = PaymentPanelView { [weak self] in
+        guard let self = self else { return }
+        
+        let currencyService = CurrencyService()
+        let currencyPresenter = CurrencyPresenter(currencyService: currencyService)
+        let currencyVC = CurrencyViewController(presenter:  currencyPresenter)
+        currencyPresenter.view = currencyVC
+        
+        currencyVC.hidesBottomBarWhenPushed = true
+        self.presenter.needsReloadAfterReturning = false
+        self.navigationController?.pushViewController(currencyVC, animated: true)
+    }
+    
     private lazy var stubView = CartStubView(text: NSLocalizedString("Cart.empty", comment: ""))
+    private lazy var deleteAlert = DeleteAlertView()
     
     private var progressHud: UIActivityIndicatorView = {
         let progress = UIActivityIndicatorView(style: .medium)
@@ -111,6 +124,11 @@ final class CartViewController: UIViewController {
             target: self,
             action: #selector(didTapSortButton)
         )
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem()
+        navigationItem.backButtonTitle = ""
+        navigationItem.backBarButtonItem?.tintColor = UIColor.segmentActive
+        
         filterButton.tintColor = UIColor.segmentActive
         navigationItem.setRightBarButton(filterButton, animated: false)
     }
@@ -148,6 +166,8 @@ final class CartViewController: UIViewController {
             nftTableView.reloadData()
             stubView.isHidden = true
         }
+        
+        paymentPanel.set(count: data.itemsCount, price: data.totalPrice)
     }
     
     @objc
@@ -206,7 +226,19 @@ extension CartViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        cell.configure(with: cards[indexPath.row])
+        let model = cards[indexPath.row]
+        cell.configure(with: cards[indexPath.row]) {[weak self] in
+            guard let self else {return}
+            deleteAlert.show(
+                on:self ,
+                with: view.frame.height,
+                image: model.image,
+                onDelete: {[presenter] in
+                    presenter.deleteNft(id: model.id)
+                }
+            )
+            view.layoutSubviews()
+        }
         
         return cell
     }
@@ -225,21 +257,35 @@ extension CartViewController: UITableViewDelegate {
 // MARK: - CartViewProtocol
 
 extension CartViewController: CartViewProtocol {
-    func update(with data: CartScreenModel) {
-        self.cards = data.items
-        if cards.isEmpty {
-            showStubView()
-        } else {
-            showMainViews(with: data)
-            nftTableView.reloadData()
+    func updateAfterDelete(with data: CartScreenModel, deletedId: String) {
+        guard let row = (cards.firstIndex {$0.id == deletedId}) else {return}
+        let lastDeletedIndexPath = IndexPath(row: row, section: 0)
+        
+        update(with: data)
+        nftTableView.performBatchUpdates {
+            nftTableView.deleteRows(at: [lastDeletedIndexPath], with: .automatic)
         }
     }
     
-    func showProgressHUD() {
+    func update(with data: CartScreenModel) {
+        cards = data.items
+        if cards.isEmpty {
+            if !stubView.isDescendant(of: view) {
+                setupStubView()
+            }
+            hideMainViews()
+            stubView.isHidden = false
+        } else {
+            showMainViews(with: data)
+            stubView.isHidden = true
+        }
+    }
+    
+    func showProgressHud() {
         progressHud.startAnimating()
     }
     
-    func hideProgressHUD() {
+    func hideProgressHud() {
         progressHud.stopAnimating()
     }
     

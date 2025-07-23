@@ -2,6 +2,8 @@ import UIKit
 
 final class PaymentPanelView: UIView {
     
+    private let onTap: () -> Void
+    
     // MARK: - UI Elements
     
     private let countLabel: UILabel = {
@@ -37,8 +39,11 @@ final class PaymentPanelView: UIView {
     
     // MARK: - Initializers
     
-    init() {
+    init(onTap: @escaping () -> Void) {
+        self.onTap = onTap
+        
         super.init(frame: .zero)
+        
         initialize()
     }
     
@@ -55,10 +60,16 @@ final class PaymentPanelView: UIView {
     
     // MARK: - Private Methods
     
+    @objc
+    private func startPayment() {
+        onTap()
+    }
+    
     private func initialize() {
         backgroundColor = UIColor.segmentInactive
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         layer.cornerRadius = 12
+        payButton.addTarget(self, action: #selector(startPayment), for: .touchUpInside)
         
         [payButton,
          countLabel,

@@ -5,6 +5,7 @@ import Kingfisher
 final class CartItemCell: UITableViewCell {
     
     static let reuseIdentifier = "CartItemCell"
+    private var alertShowingMethod: (() -> Void)?
     
     // MARK: - UI Elements
     
@@ -99,7 +100,8 @@ final class CartItemCell: UITableViewCell {
     
     // MARK: - Public Methods
     
-    func configure(with model: CartItemModel) {
+    func configure(with model: CartItemModel, action: @escaping () -> Void) {
+        alertShowingMethod = action
         ratingHStack = getRatingHStack(model.rating)
         titleAndStarsVStack.addArrangedSubview(ratingHStack)
         
@@ -109,6 +111,11 @@ final class CartItemCell: UITableViewCell {
     }
     
     // MARK: - Private Methods
+    
+    @objc
+    private func showDeleteAlert() {
+        alertShowingMethod?()
+    }
     
     private func changeImage(_ url: URL) {
         nftImageView.kf.setImage(with: url)
@@ -157,6 +164,11 @@ final class CartItemCell: UITableViewCell {
     }
     
     private func setupDeleteButton() {
+        deleteButton.addTarget(
+            self,
+            action: #selector(showDeleteAlert),
+            for: .touchUpInside
+        )
         deleteButton.snp.makeConstraints { make in
             make.trailing.equalTo(contentView.snp.trailing)
             make.centerY.equalTo(contentView.snp.centerY)
