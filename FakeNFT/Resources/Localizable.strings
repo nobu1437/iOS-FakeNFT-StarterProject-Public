@@ -15,3 +15,5 @@
 "Currency.paymentPanel.text" = "Совершая покупку, вы соглашаетесь с условиями";
 "Currency.paymentPanel.linkButton.text" = "Пользовательского соглашения";
 "Currency.text" = "Выберите способ оплаты";
+"DeleteAlert.comeBack" = "Вернуться";
+"DeleteAlert.delete" = "Удалить";

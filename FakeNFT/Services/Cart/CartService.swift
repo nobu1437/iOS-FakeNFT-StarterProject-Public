@@ -5,7 +5,7 @@ final class CartService: CartServiceProtocol {
     
     // MARK: - Public Methods
     
-    func getCartItems(onResponse: @escaping (Result<([CartItemModel], [String]) ,Error>) -> Void) {
+    func getCartItems(onResponse: @escaping (Result<(items:[CartItemModel], ids: [String]) ,Error>) -> Void) {
         let request = CartItemsRequest()
         
         networkClient.send(

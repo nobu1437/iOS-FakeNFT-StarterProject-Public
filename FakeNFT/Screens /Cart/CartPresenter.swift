@@ -40,8 +40,8 @@ final class CartPresenter {
         cartService.getCartItems { [weak self] result in
             switch result {
             case .success(let items):
-                self?.ids = items.1
-                self?.items = items.0
+                self?.ids = items.ids
+                self?.items = items.items
                 onResponse(.success(CartScreenModel(items: items.0)))
             case .failure(let error):
                 onResponse(.failure(error))
@@ -68,30 +68,30 @@ extension CartPresenter: CartPresenterProtocol {
             }
         }
     }
+    
+    func setup() {
+        guard needsReloadAfterReturning else {
+            needsReloadAfterReturning = true
+            return
+        }
         
-        func setup() {
-            if !needsReloadAfterReturning {
-                needsReloadAfterReturning = true
-                return
+        view?.showProgressHud()
+        buildScreenModel {[weak self] result in
+            guard let self = self else {return}
+            
+            switch result {
+            case .success(let model):
+                if let sortOption = UserDefaultsService.shared.sortOption {
+                    self.sort(by: sortOption)
+                } else {
+                    self.view?.update(with: model)
+                }
+            case .failure(let error):
+                print(error)
             }
             
-            view?.showProgressHud()
-            buildScreenModel {[weak self] result in
-                guard let self = self else {return}
-                
-                switch result {
-                case .success(let model):
-                    if let sortOption = UserDefaultsService.shared.sortOption {
-                        self.sort(by: sortOption)
-                    } else {
-                        self.view?.update(with: model)
-                    }
-                case .failure(let error):
-                    print(error)
-                }
-                
-                self.view?.hideProgressHud()
-            }
+            self.view?.hideProgressHud()
         }
     }
-    
+}
+
