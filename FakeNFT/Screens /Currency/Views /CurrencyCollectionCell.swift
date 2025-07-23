@@ -5,6 +5,7 @@ import Kingfisher
 final class CurrencyCollectionCell: UICollectionViewCell {
     
     static let reuseIdentifier = "CurrencyCollectionCell"
+    private(set) var model: CurrencyModel?
     
         // MARK: - UI Elements
     
@@ -71,6 +72,7 @@ final class CurrencyCollectionCell: UICollectionViewCell {
     // MARK: - Public Methods
     
     func configure(with model: CurrencyModel) {
+        self.model = model
         currencyImageView.kf.setImage(with: model.image)
         fullNameLabel.text = model.title
         shortNameLabel.text = model.name

@@ -8,6 +8,7 @@ final class CurrencyViewController: UIViewController {
     private let presenter: CurrencyPresenter
     private var currencies: [CurrencyModel] = []
     private var userAgreementLink: URL?
+    private var selectedCurrencyId: String?
     
     private lazy var paymentPanel = CurrencyPaymentBottomPanel(
         onTap: startPayment,
@@ -71,7 +72,7 @@ final class CurrencyViewController: UIViewController {
     }
     
     private func startPayment() {
-        print ("Оплата")
+        presenter.pay(in: selectedCurrencyId)
     }
     
     private func configure() {
@@ -125,9 +126,52 @@ final class CurrencyViewController: UIViewController {
     }
 }
 
+extension CurrencyViewController: SuccessPaymentViewControllerDelegate {
+    func close() {
+        navigationController?.popViewController(animated: true)
+    }
+}
+
 // MARK: - CurrencyViewControllerProtocol
 
 extension CurrencyViewController: CurrencyViewControllerProtocol {
+    func showPaymentSuccess() {
+        let successPaymentVC = SuccessPaymentViewController(delegate: self)
+        successPaymentVC.modalPresentationStyle = .fullScreen
+        present(successPaymentVC, animated: true)
+    }
+    
+    func showError(title: String?, message: String?) {
+        let alert = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+        let repeatButton = UIAlertAction(
+            // NSLocalizedString
+            title: NSLocalizedString("Повторить", comment: ""),
+            style: .default,
+            handler: { [presenter, selectedCurrencyId] _ in
+                presenter.pay(in: selectedCurrencyId)
+            }
+        )
+        
+        let cancelButton = UIAlertAction(
+            // NSLocalizedString
+            title: NSLocalizedString("Отмена", comment: ""),
+            style: .default,
+            handler: {_ in
+                alert.dismiss(animated: true)
+            }
+        )
+        
+        alert.addAction(repeatButton)
+        alert.addAction(cancelButton)
+        alert.preferredAction = repeatButton
+        
+        present(alert, animated: true)
+    }
+    
     func showProgressHud() {
         progressHud.startAnimating()
     }
@@ -167,6 +211,7 @@ extension CurrencyViewController: UICollectionViewDataSource {
 extension CurrencyViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = getCell(collectionView, at: indexPath) else { return }
+        selectedCurrencyId = cell.model?.id
         cell.select()
         paymentPanel.unlockButton()
     }

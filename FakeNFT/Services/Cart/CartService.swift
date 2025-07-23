@@ -57,7 +57,7 @@ final class CartService: CartServiceProtocol {
     }
     
     func updateCart(_ items: [String], onResponse: @escaping (Result<[String], Error>) -> Void) {
-        let request = UpdateCartItemsRequest(ids: items) // попробовать вставить dto
+        let request = UpdateCartItemsRequest(ids: items)
         networkClient.send(request: request, type: CartItemDTO.self) { result in
             switch result {
             case .success(let data):
