@@ -8,4 +8,5 @@
 import Foundation
 
 protocol ProfilePresenterProtocol: AnyObject {
+    func setup()
 }

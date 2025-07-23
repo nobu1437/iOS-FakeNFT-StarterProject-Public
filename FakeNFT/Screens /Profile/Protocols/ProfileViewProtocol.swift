@@ -6,4 +6,7 @@
 //
 
 protocol ProfileViewProtocol: AnyObject {
+    func update(with model: ProfileModel)
+    func showProgressHud()
+    func hideProgressHud()
 }

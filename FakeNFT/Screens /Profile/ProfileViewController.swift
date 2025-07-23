@@ -12,6 +12,8 @@ final class ProfileViewController: UIViewController {
     // MARK: - Properties
 
     private let presenter: ProfilePresenterProtocol
+    private var myNftCount: Int = 0
+    private var likedNftCount: Int = 0
 
     // MARK: - UI Elements
 
@@ -20,13 +22,11 @@ final class ProfileViewController: UIViewController {
         imageView.layer.cornerRadius = 35
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
-        imageView.image = UIImage(resource: .avatar)
         return imageView
     }()
 
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Joaquin Phoenix"
         label.font = UIFont.headline3
         label.textColor = UIColor.segmentActive
         return label
@@ -37,7 +37,6 @@ final class ProfileViewController: UIViewController {
         label.numberOfLines = 0
         label.font = UIFont.caption2
         label.textColor = UIColor.segmentActive
-        label.text = "Дизайнер из Казани, люблю цифровое искусство и бейглы. В моей коллекции уже 100+ NFT, и еще больше — на моём сайте. Открыт к коллаборациям."
         return label
     }()
 
@@ -45,7 +44,6 @@ final class ProfileViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont.caption1
         label.textColor = UIColor.textBlue
-        label.text = "Joaquin Phoenix.com"
         label.isUserInteractionEnabled = true
         return label
     }()
@@ -58,6 +56,13 @@ final class ProfileViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.backgroundColor = .clear
         return tableView
+    }()
+
+    private let progressHud: UIActivityIndicatorView = {
+        let progress = UIActivityIndicatorView(style: .medium)
+        progress.hidesWhenStopped = true
+        progress.color = UIColor.segmentActive
+        return progress
     }()
 
     // MARK: - Init
@@ -77,7 +82,10 @@ final class ProfileViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.background
         setupNavigationBar()
+        setupProgressHud()
         setupUI()
+        
+        presenter.setup()
     }
 
     // MARK: - Setup
@@ -90,6 +98,13 @@ final class ProfileViewController: UIViewController {
             action: #selector(editProfile)
         )
         navigationItem.rightBarButtonItem?.tintColor = UIColor.segmentActive
+    }
+
+    private func setupProgressHud() {
+        view.addSubview(progressHud)
+        progressHud.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
     }
 
     private func setupUI() {
@@ -141,6 +156,11 @@ final class ProfileViewController: UIViewController {
 
     @objc
     private func openLink() {
+        guard let urlString = linkLabel.text,
+              let url = URL(string: urlString)
+        else { return }
+
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
 }
 
@@ -148,7 +168,9 @@ final class ProfileViewController: UIViewController {
 
 extension ProfileViewController: UITableViewDataSource {
 
-    func numberOfSections(in tableView: UITableView) -> Int { return 1 }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
@@ -161,8 +183,8 @@ extension ProfileViewController: UITableViewDataSource {
             NSLocalizedString("Profile.developer", comment: "")
         ]
         let counts = [
-            "(112)",
-            "(11)",
+            "(\(myNftCount))",
+            "(\(likedNftCount))",
             ""
         ]
         
@@ -186,4 +208,33 @@ extension ProfileViewController: UITableViewDelegate {
 // MARK: - ProfileViewProtocol
 
 extension ProfileViewController: ProfileViewProtocol {
+    func update(with model: ProfileModel) {
+        nameLabel.text = model.name
+        descriptionLabel.text = model.description
+        linkLabel.text = model.website?.absoluteString
+        avatarImageView.kf.setImage(
+            with: model.avatar,
+            placeholder: UIImage(named: "avatar_placeholder"),
+            completionHandler: { result in
+                switch result {
+                case .failure:
+                    self.avatarImageView.image = UIImage(named: "avatar_placeholder")
+                default:
+                    break
+                }
+            }
+        )
+        
+        myNftCount = model.myNftCount
+        likedNftCount = model.likedNftCount
+        tableView.reloadData()
+    }
+
+    func showProgressHud() {
+        progressHud.startAnimating()
+    }
+
+    func hideProgressHud() {
+        progressHud.stopAnimating()
+    }
 }

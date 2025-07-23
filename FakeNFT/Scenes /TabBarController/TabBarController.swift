@@ -44,7 +44,7 @@ final class TabBarController: UITabBarController {
     }
 
     private func setupProfileVC() -> UIViewController {
-        let profilePresenter = ProfilePresenter()
+        let profilePresenter = ProfilePresenter(profileService: servicesAssembly.profileService)
         let profileController = ProfileViewController(presenter: profilePresenter)
         profilePresenter.view = profileController
         let navProfileController = UINavigationController(rootViewController: profileController)
