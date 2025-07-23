@@ -19,7 +19,7 @@ final class CartViewController: UIViewController {
         currencyPresenter.view = currencyVC
         
         currencyVC.hidesBottomBarWhenPushed = true
-        self.presenter.needsReloadAfterReturning = false
+        self.presenter.needsReloadAfterReturning = true
         self.navigationController?.pushViewController(currencyVC, animated: true)
     }
     
