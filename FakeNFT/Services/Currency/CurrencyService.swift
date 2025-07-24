@@ -28,4 +28,26 @@ final class CurrencyService: CurrencyServiceProtocol {
                 }
             }
     }
+    
+    func pay(currencyId: String, onResponse: @escaping (Result<PaymentDTO, any Error>) -> Void) {
+        let request = PayRequest(currencyId: currencyId)
+        networkClient.send(
+            request: request,
+            type: PaymentDTO.self) { result in
+                switch result {
+                case .success(let payment):
+                    CartService().updateCart([]) { result in
+                        switch result {
+                        case .success:
+                            onResponse(.success(payment))
+                        case .failure(let error):
+                            onResponse(.failure(error))
+                        }
+                    }
+                    
+                case .failure(let error):
+                    onResponse(.failure(error))
+                }
+            }
+    }
 }

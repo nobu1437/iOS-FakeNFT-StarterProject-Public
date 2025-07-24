@@ -5,8 +5,9 @@ import Kingfisher
 final class CurrencyCollectionCell: UICollectionViewCell {
     
     static let reuseIdentifier = "CurrencyCollectionCell"
+    private(set) var model: CurrencyModel?
     
-        // MARK: - UI Elements
+    // MARK: - UI Elements
     
     private let imageBackgroundView: UIView = {
         let view = UIView()
@@ -17,7 +18,7 @@ final class CurrencyCollectionCell: UICollectionViewCell {
     }()
     
     private let currencyImageView: UIImageView = {
-       let imageView = UIImageView()
+        let imageView = UIImageView()
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 6
         
@@ -25,7 +26,7 @@ final class CurrencyCollectionCell: UICollectionViewCell {
     }()
     
     private let fullNameLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.numberOfLines = 1
         label.font = UIFont.caption2
         label.textColor = UIColor.segmentActive
@@ -71,6 +72,7 @@ final class CurrencyCollectionCell: UICollectionViewCell {
     // MARK: - Public Methods
     
     func configure(with model: CurrencyModel) {
+        self.model = model
         currencyImageView.kf.setImage(with: model.image)
         fullNameLabel.text = model.title
         shortNameLabel.text = model.name
@@ -89,8 +91,8 @@ final class CurrencyCollectionCell: UICollectionViewCell {
     
     private func setupSubViews() {
         [imageBackgroundView,
-        currencyImageView,
-        fullNameLabel,
+         currencyImageView,
+         fullNameLabel,
          shortNameLabel].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
             contentView.addSubview($0)
