@@ -54,6 +54,8 @@ final class ProfileViewController: UIViewController {
         tableView.isScrollEnabled = false
         tableView.separatorStyle = .none
         tableView.backgroundColor = .clear
+        tableView.insetsContentViewsToSafeArea = false
+        tableView.layoutMargins = .zero
         return tableView
     }()
 
@@ -180,6 +182,10 @@ extension ProfileViewController: UITableViewDataSource {
         return 3
     }
 
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 54
+    }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let titles = [
             NSLocalizedString("Profile.nft.purchased", comment: ""),
@@ -193,11 +199,20 @@ extension ProfileViewController: UITableViewDataSource {
         ]
         
         let cell = UITableViewCell()
+        cell.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
         cell.textLabel?.font = UIFont.bodyBold
         cell.textLabel?.textColor = UIColor.segmentActive
         cell.accessoryType = .disclosureIndicator
         cell.selectionStyle = .none
         cell.textLabel?.text = "\(titles[indexPath.row]) \(counts[indexPath.row])"
+        cell.preservesSuperviewLayoutMargins = false
+        cell.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        cell.separatorInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+
+        let arrowImageView = UIImageView(image: UIImage(systemName: "chevron.forward"))
+        arrowImageView.tintColor = UIColor.segmentActive
+        cell.accessoryView = arrowImageView
+        
         return cell
     }
 }
