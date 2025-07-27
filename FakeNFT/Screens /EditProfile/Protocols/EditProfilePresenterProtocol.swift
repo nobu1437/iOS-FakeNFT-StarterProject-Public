@@ -10,6 +10,7 @@ protocol EditProfilePresenterProtocol: AnyObject {
     var description: String { get }
     var website: String { get }
     var avatar: String { get }
+    var updatedProfile: ProfileModel? { get }
 
     func updateName(_ name: String)
     func updateDescription(_ description: String)

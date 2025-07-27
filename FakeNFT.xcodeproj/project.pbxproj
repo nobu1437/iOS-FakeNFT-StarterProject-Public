@@ -23,6 +23,7 @@
         0432500A2E3221E800FBE433 /* EditProfilePresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043250092E3221E800FBE433 /* EditProfilePresenterProtocol.swift */; };
         0432500C2E32220A00FBE433 /* EditProfileViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0432500B2E3221FC00FBE433 /* EditProfileViewProtocol.swift */; };
         0432500F2E36765E00FBE433 /* ClearableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0432500E2E36765D00FBE433 /* ClearableTextView.swift */; };
+        043250112E36809000FBE433 /* EditProfileViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043250102E36808C00FBE433 /* EditProfileViewControllerDelegate.swift */; };
 		04BF23582E36C80000B64432 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 04BF23572E36C80000B64432 /* SnapKit */; };
 		0C79EE612A76DCD600EE90EA /* NftByIdRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C79EE602A76DCD600EE90EA /* NftByIdRequest.swift */; };
 		0C79EE632A76DD1900EE90EA /* RequestConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C79EE622A76DD1900EE90EA /* RequestConstants.swift */; };
@@ -134,6 +135,7 @@
 		043250092E3221E800FBE433 /* EditProfilePresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfilePresenterProtocol.swift; sourceTree = "<group>"; };
 		0432500B2E3221FC00FBE433 /* EditProfileViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewProtocol.swift; sourceTree = "<group>"; };
 		0432500E2E36765D00FBE433 /* ClearableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearableTextView.swift; sourceTree = "<group>"; };
+		043250102E36808C00FBE433 /* EditProfileViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewControllerDelegate.swift; sourceTree = "<group>"; };
 		0C79EE602A76DCD600EE90EA /* NftByIdRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftByIdRequest.swift; sourceTree = "<group>"; };
 		0C79EE622A76DD1900EE90EA /* RequestConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestConstants.swift; sourceTree = "<group>"; };
 		0C79EE652A76DDFF00EE90EA /* NftDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftDetailViewController.swift; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 		04324FFC2E32216700FBE433 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				043250102E36808C00FBE433 /* EditProfileViewControllerDelegate.swift */,
 				0432500B2E3221FC00FBE433 /* EditProfileViewProtocol.swift */,
 				043250092E3221E800FBE433 /* EditProfilePresenterProtocol.swift */,
 			);
@@ -913,6 +916,7 @@
 				04BF23532E369B9800B64432 /* ProfileViewController.swift in Sources */,
 				04BF23542E369B9800B64432 /* ProfileViewProtocol.swift in Sources */,
 				04BF23552E369B9800B64432 /* ProfilePresenterProtocol.swift in Sources */,
+				043250112E36809000FBE433 /* EditProfileViewControllerDelegate.swift in Sources */,
 				3FC8C39329D246BA0081F015 /* DateFormatters+Presets.swift in Sources */,
 				848AE67E2E26F68C00F277C5 /* UserDefaultsService.swift in Sources */,
 				84C3AA042E1EFFC4003205C1 /* CartStubView.swift in Sources */,
