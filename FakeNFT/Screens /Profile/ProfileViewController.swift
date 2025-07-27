@@ -6,6 +6,7 @@
 //
 import UIKit
 import SnapKit
+import SafariServices
 
 final class ProfileViewController: UIViewController {
 
@@ -166,7 +167,8 @@ final class ProfileViewController: UIViewController {
               let url = URL(string: urlString)
         else { return }
 
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        let safariVC = SFSafariViewController(url: url)
+        present(safariVC, animated: true, completion: nil)
     }
 }
 
