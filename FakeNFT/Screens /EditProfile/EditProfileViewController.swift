@@ -7,11 +7,14 @@
 
 import UIKit
 
+// MARK: - EditProfileViewControllerDelegate
+
 final class EditProfileViewController: UIViewController {
 
     // MARK: - Properties
 
     private let presenter: EditProfilePresenterProtocol
+    weak var delegate: EditProfileViewControllerDelegate?
 
     // MARK: - UI Elements
 
@@ -93,7 +96,10 @@ final class EditProfileViewController: UIViewController {
         linkTextView.delegate = self
 
         avatarImageView.addSubview(changePhotoLabel)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(changePhotoTapped))
+        let tapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(changePhotoTapped)
+        )
         avatarImageView.addGestureRecognizer(tapGesture)
 
         [
@@ -104,7 +110,7 @@ final class EditProfileViewController: UIViewController {
             descriptionTextView,
             linkTitleLabel,
             linkTextView,
-            loader
+            loader,
         ].forEach {
             view.addSubview($0)
         }
@@ -180,7 +186,12 @@ final class EditProfileViewController: UIViewController {
         textView.backgroundColor = UIColor.segmentInactive
         textView.layer.cornerRadius = 16
         textView.isScrollEnabled = false
-        textView.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 42)
+        textView.textContainerInset = UIEdgeInsets(
+            top: 16,
+            left: 16,
+            bottom: 16,
+            right: 42
+        )
         return textView
     }
 
@@ -201,15 +212,27 @@ final class EditProfileViewController: UIViewController {
             $0.placeholder = "https://example.com/avatar.png"
         }
 
-        alert.addAction(UIAlertAction(title: NSLocalizedString("General.cancel", comment: ""), style: .cancel))
-        alert.addAction(UIAlertAction(title: NSLocalizedString("General.ok", comment: ""), style: .default, handler: { [weak self] _ in
-            guard let self,
-                  let text = alert.textFields?.first?.text,
-                  let url = URL(string: text) else { return }
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("General.cancel", comment: ""),
+                style: .cancel
+            )
+        )
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("General.ok", comment: ""),
+                style: .default,
+                handler: { [weak self] _ in
+                    guard let self,
+                        let text = alert.textFields?.first?.text,
+                        let url = URL(string: text)
+                    else { return }
 
-            presenter.updateAvatar(text)
-            avatarImageView.kf.setImage(with: url)
-        }))
+                    presenter.updateAvatar(text)
+                    avatarImageView.kf.setImage(with: url)
+                }
+            )
+        )
 
         present(alert, animated: true)
     }
@@ -227,6 +250,10 @@ extension EditProfileViewController: EditProfileViewProtocol {
     }
 
     func close() {
+        if let updatedModel = presenter.updatedProfile {
+            delegate?.didUpdateProfile(updatedModel)
+        }
+
         dismiss(animated: true)
     }
 }

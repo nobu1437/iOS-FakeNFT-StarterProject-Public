@@ -153,6 +153,7 @@ final class ProfileViewController: UIViewController {
     private func editProfile() {
         guard let profileModel = lastLoadedModel else { return }
         let editVC = presenter.getEditProfileVC(for: profileModel)
+        editVC.delegate = self
         let nav = UINavigationController(rootViewController: editVC)
         present(nav, animated: true)
     }
@@ -230,5 +231,11 @@ extension ProfileViewController: ProfileViewProtocol {
 
     func hideProgressHud() {
         progressHud.stopAnimating()
+    }
+}
+
+extension ProfileViewController: EditProfileViewControllerDelegate {
+    func didUpdateProfile(_ updatedModel: ProfileModel) {
+        update(with: updatedModel)
     }
 }
