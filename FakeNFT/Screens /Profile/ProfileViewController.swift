@@ -12,8 +12,7 @@ final class ProfileViewController: UIViewController {
     // MARK: - Properties
 
     private let presenter: ProfilePresenterProtocol
-    private var myNftCount: Int = 0
-    private var likedNftCount: Int = 0
+    private var lastLoadedModel: ProfileModel?
 
     // MARK: - UI Elements
 
@@ -152,6 +151,10 @@ final class ProfileViewController: UIViewController {
 
     @objc
     private func editProfile() {
+        guard let profileModel = lastLoadedModel else { return }
+        let editVC = presenter.getEditProfileVC(for: profileModel)
+        let nav = UINavigationController(rootViewController: editVC)
+        present(nav, animated: true)
     }
 
     @objc
@@ -183,8 +186,8 @@ extension ProfileViewController: UITableViewDataSource {
             NSLocalizedString("Profile.developer", comment: "")
         ]
         let counts = [
-            "(\(myNftCount))",
-            "(\(likedNftCount))",
+            "(\(lastLoadedModel?.myNftCount ?? 0))",
+            "(\(lastLoadedModel?.likedNftCount ?? 0))",
             ""
         ]
         
@@ -209,24 +212,15 @@ extension ProfileViewController: UITableViewDelegate {
 
 extension ProfileViewController: ProfileViewProtocol {
     func update(with model: ProfileModel) {
+        lastLoadedModel = model
         nameLabel.text = model.name
         descriptionLabel.text = model.description
         linkLabel.text = model.website?.absoluteString
         avatarImageView.kf.setImage(
             with: model.avatar,
-            placeholder: UIImage(named: "avatar_placeholder"),
-            completionHandler: { result in
-                switch result {
-                case .failure:
-                    self.avatarImageView.image = UIImage(named: "avatar_placeholder")
-                default:
-                    break
-                }
-            }
+            placeholder: UIImage(named: "avatar_placeholder")
         )
-        
-        myNftCount = model.myNftCount
-        likedNftCount = model.likedNftCount
+
         tableView.reloadData()
     }
 

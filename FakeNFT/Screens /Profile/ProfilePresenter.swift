@@ -8,14 +8,14 @@
 import Foundation
 
 final class ProfilePresenter {
-    
+
     // MARK: - Properties
-    
+
     weak var view: ProfileViewProtocol?
     private let profileService: ProfileServiceProtocol
 
     // MARK: - Initializers
-    
+
     init(profileService: ProfileServiceProtocol) {
         self.profileService = profileService
     }
@@ -26,13 +26,13 @@ final class ProfilePresenter {
 extension ProfilePresenter: ProfilePresenterProtocol {
     func setup() {
         view?.showProgressHud()
-        
-        profileService.fetchProfile() { [weak self] result in
+
+        profileService.fetchProfile { [weak self] result in
             guard let self else { return }
-            
+
             DispatchQueue.main.async {
                 self.view?.hideProgressHud()
-                
+
                 switch result {
                 case .success(let model):
                     self.view?.update(with: model)
@@ -41,5 +41,16 @@ extension ProfilePresenter: ProfilePresenterProtocol {
                 }
             }
         }
+    }
+
+    func getEditProfileVC(for lastLoadedModel: ProfileModel) -> EditProfileViewController {
+        let editPresenter = EditProfilePresenter(
+            service: profileService,
+            profile: lastLoadedModel
+        )
+        let editVC = EditProfileViewController(presenter: editPresenter)
+        editPresenter.view = editVC
+
+        return editVC
     }
 }
