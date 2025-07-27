@@ -21,3 +21,12 @@
 "Profile.nft.purchased" = "Мои NFT";
 "Profile.nft.favorite" = "Избранные NFT";
 "Profile.developer" = "О разработчике";
+"Profile.edit.photo.change" = "Сменить\nфото";
+"Profile.edit.name.title" = "Имя";
+"Profile.edit.description.title" = "Описание";
+"Profile.edit.link.title" = "Сайт";
+"Profile.edit.photo" = "Сменить фото";
+"Profile.edit.photo.message" = "Вставьте ссылку на изображение";
+
+"General.ok" = "Ок";
+"General.cancel" = "Отмена";

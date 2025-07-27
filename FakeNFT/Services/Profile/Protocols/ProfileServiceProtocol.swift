@@ -9,4 +9,8 @@ protocol ProfileServiceProtocol {
     func fetchProfile(
         onResponse: @escaping (Result<ProfileModel, Error>) -> Void
     )
+    func updateProfile(
+        dto: UpdateProfileDTO,
+        completion: @escaping (Result<Void, Error>) -> Void
+    )
 }
