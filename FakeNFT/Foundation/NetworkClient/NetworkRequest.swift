@@ -10,15 +10,14 @@ enum HttpMethod: String {
 protocol NetworkRequest {
     var endpoint: URL? { get }
     var httpMethod: HttpMethod { get }
-    var dto: Dto? { get }
-}
-
-protocol Dto {
-    func asDictionary() -> [String: String]
+    var dto: Encodable? { get }
+    var token: String? {get}
 }
 
 // default values
 extension NetworkRequest {
     var httpMethod: HttpMethod { .get }
     var dto: Encodable? { nil }
+    var token: String? {nil}
+    var contentType: String { "application/json" }
 }
