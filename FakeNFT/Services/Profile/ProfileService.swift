@@ -29,8 +29,8 @@ final class ProfileService: ProfileServiceProtocol {
                     avatar: URL(string: dto.avatar) ?? URL(fileURLWithPath: ""),
                     description: dto.description ?? "",
                     website: URL(string: dto.website ?? ""),
-                    myNftCount: dto.nfts.count,
-                    likedNftCount: dto.likes.count
+                    nfts: dto.nfts,
+                    likes: dto.likes
                 )
 
                 onResponse(.success(model))
@@ -53,6 +53,32 @@ final class ProfileService: ProfileServiceProtocol {
                 completion(.success(()))
             case .failure(let error):
                 completion(.failure(error))
+            }
+        }
+    }
+    
+    func fetchNFT(
+        id: String,
+        onResponse: @escaping (Result<NFTModel, Error>) -> Void
+    ) {
+        let request = GetNFTRequest(nftID: id)
+
+        networkClient.send(request: request, type: NftDTO.self) { result in
+            switch result {
+            case .success(let dto):
+                let model = NFTModel(
+                    id: dto.id,
+                    name: dto.name,
+                    imageURL: dto.images.first,
+                    rating: dto.rating,
+                    price: String(format: "%.2f", dto.price),
+                    author: dto.author?.absoluteString ?? NSLocalizedString("Profile.myNFT.authorUnknown", comment: ""),
+                    description: dto.description
+                )
+                onResponse(.success(model))
+
+            case .failure(let error):
+                onResponse(.failure(error))
             }
         }
     }

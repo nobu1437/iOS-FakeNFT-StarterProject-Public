@@ -100,6 +100,7 @@ final class ProfileViewController: UIViewController {
             action: #selector(editProfile)
         )
         navigationItem.rightBarButtonItem?.tintColor = UIColor.segmentActive
+        navigationItem.backButtonTitle = ""
     }
 
     private func setupProgressHud() {
@@ -195,8 +196,8 @@ extension ProfileViewController: UITableViewDataSource {
             NSLocalizedString("Profile.developer", comment: "")
         ]
         let counts = [
-            "(\(lastLoadedModel?.myNftCount ?? 0))",
-            "(\(lastLoadedModel?.likedNftCount ?? 0))",
+            "(\(lastLoadedModel?.nfts.count ?? 0))",
+            "(\(lastLoadedModel?.likes.count ?? 0))",
             ""
         ]
         
@@ -223,6 +224,14 @@ extension ProfileViewController: UITableViewDataSource {
 
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0:
+            guard let profileModel = lastLoadedModel else { return }
+            let myNFTVC = presenter.getMyNFTProfileVC(for: profileModel)
+            navigationController?.pushViewController(myNFTVC, animated: true)
+        default:
+            break
+        }
     }
 }
 

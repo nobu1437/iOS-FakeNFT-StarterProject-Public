@@ -53,4 +53,15 @@ extension ProfilePresenter: ProfilePresenterProtocol {
 
         return editVC
     }
+
+    func getMyNFTProfileVC(for lastLoadedModel: ProfileModel) -> MyNFTViewController {
+        let profilePresenter = MyNFTPresenter(
+            service: profileService,
+            profile: lastLoadedModel
+        )
+        let myNFTVC = MyNFTViewController(presenter: profilePresenter)
+        profilePresenter.view = myNFTVC
+
+        return myNFTVC
+    }
 }

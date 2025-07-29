@@ -13,4 +13,8 @@ protocol ProfileServiceProtocol {
         dto: UpdateProfileDTO,
         completion: @escaping (Result<Void, Error>) -> Void
     )
+    func fetchNFT(
+        id: String,
+        onResponse: @escaping (Result<NFTModel, Error>) -> Void
+    )
 }

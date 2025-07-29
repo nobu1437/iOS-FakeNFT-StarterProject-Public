@@ -32,6 +32,13 @@
 "Profile.edit.link.title" = "Сайт";
 "Profile.edit.photo" = "Сменить фото";
 "Profile.edit.photo.message" = "Вставьте ссылку на изображение";
+"Profile.myNFT.price" = "Цена";
+"Profile.myNFT.authorUnknown" = "Неизвестен";
+"Profile.myNFT.authorLabel" = "от %@";
+"Profile.myNFT.price" = "%@ ETH";
+"Profile.myNFT.priceLabel" = "Цена";
+"Profile.myNFT.title" = "Мои NFT";
+"Profile.myNFT.emptyMessage" = "У вас пока нет NFT";
 
 "General.ok" = "Ок";
 "General.cancel" = "Отмена";

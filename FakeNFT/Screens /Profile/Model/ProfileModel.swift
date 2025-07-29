@@ -13,6 +13,6 @@ struct ProfileModel {
     let avatar: URL?
     let description: String
     let website: URL?
-    let myNftCount: Int
-    let likedNftCount: Int
+    let nfts: [String]
+    let likes: [String]
 }
