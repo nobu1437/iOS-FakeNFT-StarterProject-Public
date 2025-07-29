@@ -91,7 +91,10 @@ final class MyNFTViewController: UIViewController {
         view.addSubview(emptyLabel)
 
         tableView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
         }
 
         emptyLabel.snp.makeConstraints { make in

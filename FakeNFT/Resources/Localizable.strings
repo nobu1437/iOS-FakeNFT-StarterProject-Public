@@ -44,6 +44,8 @@
 "Profile.myNFT.sort.rating" = "По рейтингу";
 "Profile.myNFT.sort.name" = "По названию";
 "Profile.myNFT.sort.close" = "Закрыть";
+"Profile.favouritesNFT.title" = "Избранные NFT";
+"Profile.favouritesNFT.emptyMessage" = "У Вас ещё нет избранных NFT";
 
 "General.ok" = "Ок";
 "General.cancel" = "Отмена";

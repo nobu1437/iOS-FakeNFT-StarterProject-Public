@@ -229,6 +229,10 @@ extension ProfileViewController: UITableViewDelegate {
             guard let profileModel = lastLoadedModel else { return }
             let myNFTVC = presenter.getMyNFTProfileVC(for: profileModel)
             navigationController?.pushViewController(myNFTVC, animated: true)
+        case 1:
+            guard let profileModel = lastLoadedModel else { return }
+            let favouritesVC = presenter.getFavouritesNFTVC(for: profileModel)
+            navigationController?.pushViewController(favouritesVC, animated: true)
         default:
             break
         }
