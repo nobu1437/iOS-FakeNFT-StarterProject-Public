@@ -100,9 +100,50 @@ final class MyNFTViewController: UIViewController {
     }
 
     // MARK: - Actions
-
+    
     @objc private func sortTapped() {
-        presenter.sortNFTs()
+        let alert = UIAlertController(
+            title: NSLocalizedString("Profile.myNFT.sort", comment: ""),
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+        
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Profile.myNFT.sort.price", comment: ""),
+                style: .default,
+                handler: { _ in
+                    self.presenter.sortNFTs(by: .price)
+                }
+            )
+        )
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Profile.myNFT.sort.rating",comment: ""),
+                style: .default,
+                handler: { _ in
+                    self.presenter.sortNFTs(by: .rating)
+                }
+            )
+        )
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Profile.myNFT.sort.name",comment: ""),
+                style: .default,
+                handler: { _ in
+                    self.presenter.sortNFTs(by: .name)
+                }
+            )
+        )
+        alert.addAction(
+            UIAlertAction(
+                title: NSLocalizedString("Profile.myNFT.sort.close",comment: ""),
+                style: .cancel,
+                handler: nil
+            )
+        )
+        
+        present(alert, animated: true, completion: nil)
     }
 }
 

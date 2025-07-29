@@ -7,5 +7,5 @@
 
 protocol MyNFTPresenterProtocol {
     func loadNFTs()
-    func sortNFTs()
+    func sortNFTs(by option: NFTSortOption)
 }

@@ -33,6 +33,7 @@
 		04BF236C2E37FD5300B64432 /* MyNFTPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BF236B2E37FD5200B64432 /* MyNFTPresenter.swift */; };
 		04BF23702E380E1A00B64432 /* NftDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BF236F2E380E1300B64432 /* NftDTO.swift */; };
 		04BF23722E380E9800B64432 /* GetNFTRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BF23712E380E9700B64432 /* GetNFTRequest.swift */; };
+		04BF23742E38DD7000B64432 /* NFTSortOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BF23732E38DD6D00B64432 /* NFTSortOption.swift */; };
 		0C79EE612A76DCD600EE90EA /* NftByIdRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C79EE602A76DCD600EE90EA /* NftByIdRequest.swift */; };
 		0C79EE632A76DD1900EE90EA /* RequestConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C79EE622A76DD1900EE90EA /* RequestConstants.swift */; };
 		0C79EE662A76DDFF00EE90EA /* NftDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C79EE652A76DDFF00EE90EA /* NftDetailViewController.swift */; };
@@ -114,6 +115,7 @@
 		04BF236B2E37FD5200B64432 /* MyNFTPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNFTPresenter.swift; sourceTree = "<group>"; };
 		04BF236F2E380E1300B64432 /* NftDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftDTO.swift; sourceTree = "<group>"; };
 		04BF23712E380E9700B64432 /* GetNFTRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetNFTRequest.swift; sourceTree = "<group>"; };
+		04BF23732E38DD6D00B64432 /* NFTSortOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTSortOption.swift; sourceTree = "<group>"; };
 		0C79EE602A76DCD600EE90EA /* NftByIdRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftByIdRequest.swift; sourceTree = "<group>"; };
 		0C79EE622A76DD1900EE90EA /* RequestConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestConstants.swift; sourceTree = "<group>"; };
 		0C79EE652A76DDFF00EE90EA /* NftDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftDetailViewController.swift; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 		04BF23662E375A1800B64432 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				04BF23732E38DD6D00B64432 /* NFTSortOption.swift */,
 				04BF23672E375ACE00B64432 /* NFTModel.swift */,
 			);
 			path = Model;
@@ -722,6 +725,7 @@
 				0CFCB7462A78064B0009A829 /* NftDetailCellModel.swift in Sources */,
 				0CFCB74B2A780EA80009A829 /* UIView+Constraints.swift in Sources */,
 				04BF236C2E37FD5300B64432 /* MyNFTPresenter.swift in Sources */,
+				04BF23742E38DD7000B64432 /* NFTSortOption.swift in Sources */,
 				3F6806D729CBC50A00B4F915 /* CellsReusingUtils.swift in Sources */,
 				0C79EE612A76DCD600EE90EA /* NftByIdRequest.swift in Sources */,
 				04324FEE2E3124AF00FBE433 /* ProfileModel.swift in Sources */,

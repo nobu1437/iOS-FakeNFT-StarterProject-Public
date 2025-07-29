@@ -54,8 +54,15 @@ extension MyNFTPresenter: MyNFTPresenterProtocol {
         }
     }
 
-    func sortNFTs() {
-        nftList.sort { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
+    func sortNFTs(by option: NFTSortOption) {
+        switch option {
+        case .price:
+            nftList.sort { ($0.price as NSString).doubleValue < ($1.price as NSString).doubleValue }
+        case .rating:
+            nftList.sort { $0.rating > $1.rating }
+        case .name:
+            nftList.sort { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
+        }
         view?.update(with: nftList)
     }
 }
