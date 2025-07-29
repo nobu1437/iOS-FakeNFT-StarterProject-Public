@@ -64,4 +64,15 @@ extension ProfilePresenter: ProfilePresenterProtocol {
 
         return myNFTVC
     }
+
+    func getFavouritesNFTVC(for lastLoadedModel: ProfileModel) -> FavouritesNFTViewController {
+        let favouritesPresenter = FavouritesNFTPresenter(
+            service: profileService,
+            profile: lastLoadedModel
+        )
+        let favouritesNFTVC = FavouritesNFTViewController(presenter: favouritesPresenter)
+        favouritesPresenter.view = favouritesNFTVC
+
+        return favouritesNFTVC
+    }
 }
