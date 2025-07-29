@@ -39,6 +39,11 @@
 "Profile.myNFT.priceLabel" = "Цена";
 "Profile.myNFT.title" = "Мои NFT";
 "Profile.myNFT.emptyMessage" = "У вас пока нет NFT";
+"Profile.myNFT.sort" = "Сортировка";
+"Profile.myNFT.sort.price" = "По цене";
+"Profile.myNFT.sort.rating" = "По рейтингу";
+"Profile.myNFT.sort.name" = "По названию";
+"Profile.myNFT.sort.close" = "Закрыть";
 
 "General.ok" = "Ок";
 "General.cancel" = "Отмена";
