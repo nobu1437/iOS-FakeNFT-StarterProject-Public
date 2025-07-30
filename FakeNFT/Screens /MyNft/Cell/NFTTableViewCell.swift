@@ -176,8 +176,8 @@ final class NFTTableViewCell: UITableViewCell {
         }
 
         ratingView.snp.makeConstraints { make in
-            make.width.equalTo((NFTTableViewCell.STAR_SIZE * 5) + (NFTTableViewCell.STAR_SPACING * 4))
-            make.height.equalTo(NFTTableViewCell.STAR_SIZE)
+            make.width.equalTo((NFTTableViewCell.starSize * 5) + (NFTTableViewCell.starSpacing * 4))
+            make.height.equalTo(NFTTableViewCell.starSize)
         }
     }
 
@@ -198,11 +198,11 @@ final class NFTTableViewCell: UITableViewCell {
             let star = UIImageView(
                 image: UIImage(resource: i < rating ? .starDone : .starNoActive)
             )
-            star.snp.makeConstraints { $0.size.equalTo(NFTTableViewCell.STAR_SIZE) }
+            star.snp.makeConstraints { $0.size.equalTo(NFTTableViewCell.starSize) }
             ratingView.addArrangedSubview(star)
         }
     }
     
-    private static let STAR_SIZE: CGFloat = 14
-    private static let STAR_SPACING: CGFloat = 2
+    private static let starSize: CGFloat = 14
+    private static let starSpacing: CGFloat = 2
 }
