@@ -40,8 +40,11 @@ extension MyNFTPresenter: MyNFTPresenterProtocol {
 
                 guard let self = self else { return }
 
-                if case .success(let nft) = result {
+                switch result {
+                case .success(let nft):
                     self.nftList.append(nft)
+                case .failure(let error):
+                    print("Error loading NFT with id \(id): \(error)")
                 }
             }
         }

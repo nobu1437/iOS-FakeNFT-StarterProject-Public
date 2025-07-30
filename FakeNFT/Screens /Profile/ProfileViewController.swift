@@ -224,17 +224,18 @@ extension ProfileViewController: UITableViewDataSource {
 
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.row {
-        case 0:
-            guard let profileModel = lastLoadedModel else { return }
+        guard let cellType = ProfileCellType(rawValue: indexPath.row),
+              let profileModel = lastLoadedModel else { return }
+
+        switch cellType {
+        case .myNFTs:
             let myNFTVC = presenter.getMyNFTProfileVC(for: profileModel)
             navigationController?.pushViewController(myNFTVC, animated: true)
-        case 1:
-            guard let profileModel = lastLoadedModel else { return }
+        case .favourites:
             let favouritesVC = presenter.getFavouritesNFTVC(for: profileModel)
             navigationController?.pushViewController(favouritesVC, animated: true)
-        default:
-            break
+        case .developer:
+            print("Developer cell tapped")
         }
     }
 }
