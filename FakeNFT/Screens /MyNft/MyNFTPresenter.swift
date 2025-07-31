@@ -69,3 +69,11 @@ extension MyNFTPresenter: MyNFTPresenterProtocol {
         view?.update(with: nftList)
     }
 }
+
+#if DEBUG
+extension MyNFTPresenter {
+    func setNFTListForTesting(_ list: [NFTModel]) {
+        self.nftList = list
+    }
+}
+#endif
