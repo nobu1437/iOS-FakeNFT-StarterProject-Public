@@ -40,6 +40,11 @@
 		04BF237E2E38EE5A00B64432 /* FavouritesNFTViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BF237D2E38EE5A00B64432 /* FavouritesNFTViewProtocol.swift */; };
 		04BF23812E38EFA900B64432 /* NFTCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BF23802E38EFA800B64432 /* NFTCollectionViewCell.swift */; };
 		04BF23832E3A626D00B64432 /* ProfileCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BF23822E3A626A00B64432 /* ProfileCellType.swift */; };
+		04BF23852E3BAFFC00B64432 /* MyNFTPresenterSortingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BF23842E3BAFF700B64432 /* MyNFTPresenterSortingTests.swift */; };
+		04BF23872E3BB5E600B64432 /* MockProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BF23862E3BB5E500B64432 /* MockProfileService.swift */; };
+		04BF23892E3BB5F600B64432 /* MockMyNFTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BF23882E3BB5F500B64432 /* MockMyNFTView.swift */; };
+		04BF238C2E3BB67400B64432 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 04BF238B2E3BB67400B64432 /* SnapshotTesting */; };
+		04BF23912E3BB69800B64432 /* ProfileViewSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BF23902E3BB69700B64432 /* ProfileViewSnapshotTests.swift */; };
 		0C79EE612A76DCD600EE90EA /* NftByIdRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C79EE602A76DCD600EE90EA /* NftByIdRequest.swift */; };
 		0C79EE632A76DD1900EE90EA /* RequestConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C79EE622A76DD1900EE90EA /* RequestConstants.swift */; };
 		0C79EE662A76DDFF00EE90EA /* NftDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C79EE652A76DDFF00EE90EA /* NftDetailViewController.swift */; };
@@ -128,6 +133,10 @@
 		04BF237D2E38EE5A00B64432 /* FavouritesNFTViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesNFTViewProtocol.swift; sourceTree = "<group>"; };
 		04BF23802E38EFA800B64432 /* NFTCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTCollectionViewCell.swift; sourceTree = "<group>"; };
 		04BF23822E3A626A00B64432 /* ProfileCellType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCellType.swift; sourceTree = "<group>"; };
+		04BF23842E3BAFF700B64432 /* MyNFTPresenterSortingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNFTPresenterSortingTests.swift; sourceTree = "<group>"; };
+		04BF23862E3BB5E500B64432 /* MockProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockProfileService.swift; sourceTree = "<group>"; };
+		04BF23882E3BB5F500B64432 /* MockMyNFTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMyNFTView.swift; sourceTree = "<group>"; };
+		04BF23902E3BB69700B64432 /* ProfileViewSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewSnapshotTests.swift; sourceTree = "<group>"; };
 		0C79EE602A76DCD600EE90EA /* NftByIdRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftByIdRequest.swift; sourceTree = "<group>"; };
 		0C79EE622A76DD1900EE90EA /* RequestConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestConstants.swift; sourceTree = "<group>"; };
 		0C79EE652A76DDFF00EE90EA /* NftDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NftDetailViewController.swift; sourceTree = "<group>"; };
@@ -184,6 +193,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04BF238C2E3BB67400B64432 /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,6 +473,10 @@
 		3F6806AC29CBBAF200B4F915 /* FakeNFTTests */ = {
 			isa = PBXGroup;
 			children = (
+				04BF23902E3BB69700B64432 /* ProfileViewSnapshotTests.swift */,
+				04BF23882E3BB5F500B64432 /* MockMyNFTView.swift */,
+				04BF23862E3BB5E500B64432 /* MockProfileService.swift */,
+				04BF23842E3BAFF700B64432 /* MyNFTPresenterSortingTests.swift */,
 				3F6806AD29CBBAF200B4F915 /* ExampleUnitTests.swift */,
 			);
 			path = FakeNFTTests;
@@ -683,6 +697,7 @@
 				3F603CCB29DB4A53000C43D7 /* XCRemoteSwiftPackageReference "ProgressHUD" */,
 				3F603CCE29DB4A74000C43D7 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				04BF23562E36C7D000B64432 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				04BF238A2E3BB67400B64432 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 			);
 			productRefGroup = 3F68069429CBBAF100B4F915 /* Products */;
 			projectDirPath = "";
@@ -795,6 +810,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04BF23852E3BAFFC00B64432 /* MyNFTPresenterSortingTests.swift in Sources */,
+				04BF23912E3BB69800B64432 /* ProfileViewSnapshotTests.swift in Sources */,
+				04BF23892E3BB5F600B64432 /* MockMyNFTView.swift in Sources */,
+				04BF23872E3BB5E600B64432 /* MockProfileService.swift in Sources */,
 				3F6806AE29CBBAF200B4F915 /* ExampleUnitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1129,6 +1148,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		04BF238A2E3BB67400B64432 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.18.6;
+			};
+		};
 		3F603CCB29DB4A53000C43D7 /* XCRemoteSwiftPackageReference "ProgressHUD" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/relatedcode/ProgressHUD";
@@ -1152,6 +1179,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 04BF23562E36C7D000B64432 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		04BF238B2E3BB67400B64432 /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04BF238A2E3BB67400B64432 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
 		};
 		3F603CCC29DB4A53000C43D7 /* ProgressHUD */ = {
 			isa = XCSwiftPackageProductDependency;
