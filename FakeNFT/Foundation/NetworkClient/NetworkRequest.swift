@@ -19,4 +19,5 @@ extension NetworkRequest {
     var httpMethod: HttpMethod { .get }
     var dto: Encodable? { nil }
     var token: String? {nil}
+    var contentType: String { "application/json" }
 }

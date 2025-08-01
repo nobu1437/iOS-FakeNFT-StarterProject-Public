@@ -121,11 +121,24 @@ struct DefaultNetworkClient: NetworkClient {
         if request.httpMethod == .put {
             urlRequest.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
             urlRequest.setValue("application/json", forHTTPHeaderField: "Accept")
+        } else {
+            urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         }
 
-        if let dto = request.dto,
-           let dtoEncoded = try? encoder.encode(dto) {
-            urlRequest.httpBody = dtoEncoded
+        if let dto = request.dto {
+            if request.httpMethod == .put {
+                if let formEncoded = formURLEncodedString(from: dto) {
+                    urlRequest.httpBody = formEncoded.data(using: .utf8)
+                } else {
+                    assertionFailure("Failed to encode dto as x-www-form-urlencoded")
+                }
+            } else {
+                do {
+                    urlRequest.httpBody = try encoder.encode(dto)
+                } catch {
+                    assertionFailure("Failed to encode dto as JSON: \(error)")
+                }
+            }
         }
 
         if let token = request.token {
@@ -134,6 +147,7 @@ struct DefaultNetworkClient: NetworkClient {
 
         return urlRequest
     }
+
     private func parse<T: Decodable>(data: Data, type _: T.Type, onResponse: @escaping (Result<T, Error>) -> Void) {
         do {
             let response = try decoder.decode(T.self, from: data)
@@ -141,5 +155,19 @@ struct DefaultNetworkClient: NetworkClient {
         } catch {
             onResponse(.failure(NetworkClientError.parsingError))
         }
+    }
+
+    private func formURLEncodedString(from encodable: Encodable) -> String? {
+        guard let data = try? JSONEncoder().encode(encodable),
+              let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            return nil
+        }
+
+        return json.map { key, value in
+            let escapedKey = key.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+            let escapedValue = "\(value)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+            return "\(escapedKey)=\(escapedValue)"
+        }
+        .joined(separator: "&")
     }
 }
