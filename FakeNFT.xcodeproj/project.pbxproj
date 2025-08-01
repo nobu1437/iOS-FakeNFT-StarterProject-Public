@@ -24,7 +24,6 @@
 		04BF23532E369B9800B64432 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BF234F2E369B9800B64432 /* ProfileViewController.swift */; };
 		04BF23542E369B9800B64432 /* ProfileViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BF234C2E369B9800B64432 /* ProfileViewProtocol.swift */; };
 		04BF23552E369B9800B64432 /* ProfilePresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BF234B2E369B9800B64432 /* ProfilePresenterProtocol.swift */; };
-		04BF23582E36C80000B64432 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 04BF23572E36C80000B64432 /* SnapKit */; };
 		04BF235D2E3759A100B64432 /* MyNFTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BF235C2E3759A000B64432 /* MyNFTViewController.swift */; };
 		04BF23602E3759D100B64432 /* NFTTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BF235F2E3759CA00B64432 /* NFTTableViewCell.swift */; };
 		04BF23632E3759F800B64432 /* MyNFTPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04BF23622E3759F100B64432 /* MyNFTPresenterProtocol.swift */; };
@@ -367,17 +366,6 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
-		04BF23512E369B9800B64432 /* Screens  */ = {
-			isa = PBXGroup;
-			children = (
-				04BF23752E38EB5B00B64432 /* FavouritesNFT */,
-				04BF235B2E37598900B64432 /* MyNft */,
-				04BF23502E369B9800B64432 /* Profile */,
-				04324FFB2E32215C00FBE433 /* EditProfile */,
-			);
-			path = "Screens ";
-			sourceTree = "<group>";
-		};
 		04BF235B2E37598900B64432 /* MyNft */ = {
 			isa = PBXGroup;
 			children = (
@@ -531,8 +519,7 @@
 		3F68069529CBBAF100B4F915 /* FakeNFT */ = {
 			isa = PBXGroup;
 			children = (
-				84C3A9F02E1EB86C003205C1 /* Screens  */,
-				04BF23512E369B9800B64432 /* Screens  */,
+				84C3A9F02E1EB86C003205C1 /* Screens */,
 				3F68069629CBBAF100B4F915 /* AppDelegate.swift */,
 				3F68069829CBBAF100B4F915 /* SceneDelegate.swift */,
 				E1CD40DA2A96BE9B00BE7FE8 /* Resources */,
@@ -723,15 +710,19 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
-		84C3A9F02E1EB86C003205C1 /* Screens  */ = {
+		84C3A9F02E1EB86C003205C1 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				04BF23752E38EB5B00B64432 /* FavouritesNFT */,
+				04BF235B2E37598900B64432 /* MyNft */,
+				04BF23502E369B9800B64432 /* Profile */,
+				04324FFB2E32215C00FBE433 /* EditProfile */,
 				84B9D2252E2F790300440F34 /* SuccessPayment */,
 				84B9D21C2E2E69AD00440F34 /* UserAgreement */,
 				84CA4EBD2E256B7F00590D72 /* Currency */,
 				84C3A9F12E1EB875003205C1 /* Cart */,
 			);
-			path = "Screens ";
+			path = Screens;
 			sourceTree = "<group>";
 		};
 		84C3A9F12E1EB875003205C1 /* Cart */ = {
@@ -1067,7 +1058,6 @@
 				8495D24C2E24480000D2E53F /* UpdateCartItemsRequest.swift in Sources */,
 				8495D2522E244D0F00D2E53F /* CartItemDTO.swift in Sources */,
 				8400781C2E2A7C3800EAA223 /* CurrencyServiceProtocol.swift in Sources */,
-				3FC8C39129D2453B0081F015 /* ExamplePutRequest.swift in Sources */,
 				0CFCB7462A78064B0009A829 /* NftDetailCellModel.swift in Sources */,
 				0CFCB74B2A780EA80009A829 /* UIView+Constraints.swift in Sources */,
 				84CA4ECA2E256C6600590D72 /* CurrencyModel.swift in Sources */,
@@ -1440,14 +1430,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		04BF23562E36C7D000B64432 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SnapKit/SnapKit";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.7.1;
-			};
-		};
 		04BF238A2E3BB67400B64432 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing.git";
@@ -1483,11 +1465,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		04BF23572E36C80000B64432 /* SnapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 04BF23562E36C7D000B64432 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = SnapKit;
-		};
 		04BF238B2E3BB67400B64432 /* SnapshotTesting */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 04BF238A2E3BB67400B64432 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
