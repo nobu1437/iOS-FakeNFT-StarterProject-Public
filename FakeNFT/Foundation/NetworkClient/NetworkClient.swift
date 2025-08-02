@@ -118,22 +118,32 @@ struct DefaultNetworkClient: NetworkClient {
         var urlRequest = URLRequest(url: endpoint)
         urlRequest.httpMethod = request.httpMethod.rawValue
 
-        urlRequest.addValue(RequestConstants.token, forHTTPHeaderField: "X-Practicum-Mobile-Token")
-
-        if let dtoDictionary = request.dto?.asDictionary() {
-            var urlComponents = URLComponents()
-            let queryItems = dtoDictionary.map { field in
-                URLQueryItem(
-                    name: field.key,
-                    value: field.value
-                    )
-            }
-            urlComponents.queryItems = queryItems
-            urlRequest.httpBody = urlComponents.query?.data(using: .utf8)
+        if request.httpMethod == .put {
+            urlRequest.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+            urlRequest.setValue("application/json", forHTTPHeaderField: "Accept")
+        } else {
             urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         }
 
-        urlRequest.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        if let dto = request.dto {
+            if request.httpMethod == .put {
+                if let formEncoded = formURLEncodedString(from: dto) {
+                    urlRequest.httpBody = formEncoded.data(using: .utf8)
+                } else {
+                    assertionFailure("Failed to encode dto as x-www-form-urlencoded")
+                }
+            } else {
+                do {
+                    urlRequest.httpBody = try encoder.encode(dto)
+                } catch {
+                    assertionFailure("Failed to encode dto as JSON: \(error)")
+                }
+            }
+        }
+
+        if let token = request.token {
+            urlRequest.setValue(token, forHTTPHeaderField: "X-Practicum-Mobile-Token")
+        }
 
         return urlRequest
     }
@@ -145,5 +155,19 @@ struct DefaultNetworkClient: NetworkClient {
         } catch {
             onResponse(.failure(NetworkClientError.parsingError))
         }
+    }
+
+    private func formURLEncodedString(from encodable: Encodable) -> String? {
+        guard let data = try? JSONEncoder().encode(encodable),
+              let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            return nil
+        }
+
+        return json.map { key, value in
+            let escapedKey = key.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+            let escapedValue = "\(value)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+            return "\(escapedKey)=\(escapedValue)"
+        }
+        .joined(separator: "&")
     }
 }
